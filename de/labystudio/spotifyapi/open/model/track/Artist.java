@@ -1,0 +1,7 @@
+package de.labystudio.spotifyapi.open.model.track;
+
+public class Artist {
+   public String id;
+   public String name;
+   public String uri;
+}

@@ -1,0 +1,34 @@
+package io.github.kosmx.emotes.arch.screen.widget.preview.elemets;
+
+import com.mojang.authlib.GameProfile;
+import io.github.kosmx.emotes.arch.screen.widget.AbstractFastChooseWidget;
+import org.joml.Vector2f;
+
+public class PlayerChooseCircleElement extends PlayerChooseElement {
+   protected final float angle;
+
+   public PlayerChooseCircleElement(AbstractFastChooseWidget parent, GameProfile profile, int id, float angle) {
+      super(parent, profile, id);
+      this.angle = angle;
+   }
+
+   @Override
+   protected void getDirectionVector(Vector2f out) {
+      float rad = (float)Math.toRadians(this.angle);
+      out.set((float)Math.sin(rad), (float)Math.cos(rad));
+   }
+
+   @Override
+   protected void updateRectangle(float easedProgress) {
+      int s = this.parent.globalPadding();
+      int iconX = (int)(
+            this.parent.method_46426() + this.parent.method_25368() / 2 + this.parent.method_25368() * 0.36 * Math.sin(this.angle * 0.0174533) * easedProgress
+         )
+         - s;
+      int iconY = (int)(
+            this.parent.method_46427() + this.parent.method_25364() / 2 + this.parent.method_25364() * 0.36 * Math.cos(this.angle * 0.0174533) * easedProgress
+         )
+         - s;
+      this.method_55444(s * 2, s * 2, iconX, iconY);
+   }
+}
